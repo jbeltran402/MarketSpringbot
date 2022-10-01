@@ -5,37 +5,55 @@ import java.util.Optional;
 
 import org.springframework.stereotype.Repository;
 
+import com.juan.tienda.domain.Product;
+import com.juan.tienda.domain.repository.ProducRepository;
 import com.juan.tienda.persistence.crud.ProductoCrudRepository;
 import com.juan.tienda.persistence.entity.Producto;
+import com.juan.tienda.persistence.mapper.ProductMapper;
 
 @Repository
-public class ProductoRepository {
-    private ProductoCrudRepository productoCrudRepository;
+public class ProductoRepository implements ProducRepository{
     
-    public List<Producto> getAll(){
-        return (List<Producto>) productoCrudRepository.findAll();
+    private ProductoCrudRepository productoCrudRepository;
+    private ProductMapper mapper;
+    
+    @Override
+    public List<Product> getAll(){
+        List<Producto> productos = (List<Producto>) productoCrudRepository.findAll();
+        return mapper.toProducts(productos);
     }
 
-    public List<Producto> getBycategoria(int idCategoria){
-        return productoCrudRepository.findByIdCategoriaOrdeByNombreAsc(idCategoria);
+    @Override
+    public void delete(int productoId){
+        productoCrudRepository.deleteById(productoId);
     }
 
-    public List<Producto> getBycategoriaQuery(int idCategoria){
-        return productoCrudRepository.findByIdCategoriaQuery(idCategoria);
+    @Override
+    public Optional<List<Product>> getByCategory(int categoryId) {
+        List<Producto>productos = productoCrudRepository.findByIdCategoriaOrdeByNombreAsc(categoryId);
+        return Optional.of(mapper.toProducts(productos));
     }
 
-    public Optional<List<Producto>> getEscasos(Integer cantidad){
-        return productoCrudRepository.findByCantidadStockLessThanAndEstado(cantidad, true);
+    @Override
+    public Optional<List<Product>> getScarseProducts(int quantity) {
+        Optional<List<Producto>> productos = productoCrudRepository.findByCantidadStockLessThanAndEstado(quantity, true);
+        return productos.map(prods -> mapper.toProducts(prods));
     }
 
-    public Optional<Producto> getProducto(Integer idProducto){
-        return productoCrudRepository.findById(idProducto);
+    @Override
+    public Optional<Product> getProduct(int producId) {
+        return productoCrudRepository.findById(producId).map(producto -> mapper.toProduct(producto));
     }
 
-    public Producto save(Producto producto){
-        return productoCrudRepository.save(producto);
+    @Override
+    public Product save(Product product) {
+        Producto producto =mapper.toProduct(product);
+        return mapper.toProduct(productoCrudRepository.save(producto));
     }
-    public void delete(int idProducto){
-        productoCrudRepository.deleteById(idProducto);
+
+    @Override
+    public Optional<List<Product>> getByCategoryQuery(int categoryId) {
+        List<Producto> productos = productoCrudRepository.findByIdCategoriaQuery(categoryId);
+        return Optional.of(mapper.toProducts(productos));
     }
 }

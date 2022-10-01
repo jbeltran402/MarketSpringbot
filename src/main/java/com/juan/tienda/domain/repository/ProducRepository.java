@@ -7,7 +7,8 @@ import com.juan.tienda.domain.Product;
 
 public interface ProducRepository {
     List<Product> getAll();
-    Optional <List<Product>> getByCategory(int cate);
+    Optional <List<Product>> getByCategory(int categoryId);
+    Optional <List<Product>> getByCategoryQuery(int categoryId);
     Optional<List<Product>> getScarseProducts(int quantity);
     Optional<Product> getProduct(int producId);
     Product save(Product product);

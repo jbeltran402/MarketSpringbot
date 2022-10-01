@@ -1,14 +1,15 @@
 package com.juan.tienda.domain;
 
 public class Product {
-    
+
     private int producId;
     private String name;
     private int categoryId;
+    private int price;
     private int stock;
     private boolean active;
     private Category category;
-
+    
     public int getProducId() {
         return producId;
     }
@@ -26,6 +27,12 @@ public class Product {
     }
     public void setCategoryId(int categoryId) {
         this.categoryId = categoryId;
+    }
+    public int getPrice() {
+        return price;
+    }
+    public void setPrice(int price) {
+        this.price = price;
     }
     public int getStock() {
         return stock;
