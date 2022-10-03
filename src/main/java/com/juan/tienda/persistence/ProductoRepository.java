@@ -3,6 +3,7 @@ package com.juan.tienda.persistence;
 import java.util.List;
 import java.util.Optional;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
 import com.juan.tienda.domain.Product;
@@ -14,7 +15,10 @@ import com.juan.tienda.persistence.mapper.ProductMapper;
 @Repository
 public class ProductoRepository implements ProducRepository{
     
+    @Autowired
     private ProductoCrudRepository productoCrudRepository;
+    
+    @Autowired
     private ProductMapper mapper;
     
     @Override

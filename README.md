@@ -22,8 +22,8 @@ src/main/java/com/juan/tienda
 
 ## DB Structure
 
-`-- -----------------------------------------------------
--- Table "CATEGORIAS"
+-- -----------------------------------------------------
+Table "CATEGORIAS"
 -- -----------------------------------------------------
 CREATE TABLE  CATEGORIAS (
   "id_categoria" SERIAL NOT NULL,
@@ -33,7 +33,7 @@ CREATE TABLE  CATEGORIAS (
 
 
 -- -----------------------------------------------------
--- Table "PRODUCTOS"
+Table "PRODUCTOS"
 -- -----------------------------------------------------
 CREATE TABLE  PRODUCTOS (
   "id_producto" SERIAL NOT NULL,
@@ -52,7 +52,7 @@ CREATE TABLE  PRODUCTOS (
 
 
 -- -----------------------------------------------------
--- Table "CLIENTES"
+Table "CLIENTES"
 -- -----------------------------------------------------
 CREATE TABLE  CLIENTES (
   "id" VARCHAR(20) NOT NULL,
@@ -65,7 +65,7 @@ CREATE TABLE  CLIENTES (
 
 
 -- -----------------------------------------------------
--- Table "COMPRAS"
+Table "COMPRAS"
 -- -----------------------------------------------------
 CREATE TABLE  COMPRAS (
   "id_compra" SERIAL NOT NULL,
@@ -83,7 +83,7 @@ CREATE TABLE  COMPRAS (
 
 
 -- -----------------------------------------------------
--- Table "COMPRAS_PRODUCTOS"
+Table "COMPRAS_PRODUCTOS"
 -- -----------------------------------------------------
 CREATE TABLE  COMPRAS_PRODUCTOS (
   "id_compra" INT NOT NULL,
@@ -182,7 +182,10 @@ INSERT INTO compras_productos VALUES (1, 24, 1, 4000, true);
 -- SE REINICIAN LAS SECUENCIAS SEGÚN LOS DATOS INICIALES
 SELECT setval('public.productos_id_producto_seq', 50, true);
 SELECT setval('public.categorias_id_categoria_seq', 8, true);
-SELECT setval('public.compras_id_compra_seq', 1, true);`
+SELECT setval('public.compras_id_compra_seq', 1, true);
 
 ## Query methods JPA
 **https://docs.spring.io/spring-data/jpa/docs/current/reference/html/#jpa.query-methods**
+
+## Constructor Injection
+**https://reflectoring.io/constructor-injection/**
