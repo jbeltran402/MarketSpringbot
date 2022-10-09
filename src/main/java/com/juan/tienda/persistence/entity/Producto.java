@@ -84,14 +84,10 @@ public class Producto {
     public void setCantidadStock(Integer cantidadStock) {
         this.cantidadStock = cantidadStock;
     }
-
     public Boolean getEstado() {
         return estado;
     }
-
     public void setEstado(Boolean estado) {
         this.estado = estado;
     }
-
-    
 }
